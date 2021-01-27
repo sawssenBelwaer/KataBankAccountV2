@@ -13,11 +13,21 @@ public class BankAccount {
         this.amount = amount;
     }
 
-    public void deposit(BigDecimal amount) {
+    public void deposit(BigDecimal amount) throws BankAccountException {
+        if (amount.compareTo(BigDecimal.ZERO) < 0) {
+            throw new BankAccountException();
+        }
         this.setAmount(this.getAmount().add(amount));
     }
 
     public BigDecimal getBalance() {
         return this.getAmount();
+    }
+
+    public void withdraw(BigDecimal amount) throws BankAccountException {
+        if (amount.compareTo(BigDecimal.ZERO) < 0) {
+            throw new BankAccountException();
+        }
+        this.setAmount((this.getAmount().subtract(amount)));
     }
 }
